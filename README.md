@@ -1,1 +1,1 @@
-# linux_bloody_keyboard_rgb_switcher
+# linux bloody keyboard rgb switcher

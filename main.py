@@ -56,16 +56,16 @@ class Device:
 
 class KeyboardControl:
     def __init__(self, id_vendor, id_product):
-        self.device = Device(id_vendor, id_product)
+        self.__keyboard = Device(id_vendor, id_product)
 
     def set_rgb_highlight(self, rgb_profile):
-        self.device.detach()
+        self.__keyboard.detach()
         for hex_value in rgb_profile.hex_values:
             try:
-                self.device.set_hex_value(hex_value)
+                self.__keyboard.set_hex_value(hex_value)
             except usb.core.USBError:
-                self.device.release()
-        self.device.release()
+                self.__keyboard.release()
+        self.__keyboard.release()
 
 
 class RGBProfile:

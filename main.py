@@ -1,5 +1,6 @@
 import json
 import os
+from typing import Dict, List
 
 import usb
 
@@ -24,27 +25,27 @@ class Device:
 
         self.__init_device()
 
-    def __init_device(self):
+    def __init_device(self) -> None:
         self.__device = usb.core.find(
             idVendor=self.id_vendor, idProduct=self.id_product
         )
         if self.__device is None:
             raise ValueError("Keyboard not found!")
 
-    def detach(self):
+    def detach(self) -> None:
         for config in self.__device:
             for i in range(config.bNumInterfaces):
                 if self.__device.is_kernel_driver_active(i):
                     self.__device.detach_kernel_driver(i)
         self.__device.set_configuration()
 
-    def release(self):
+    def release(self) -> None:
         for config in self.__device:
             for i in range(config.bNumInterfaces):
                 usb.util.release_interface(self.__device, i)
                 self.__device.attach_kernel_driver(i)
 
-    def set_hex_value(self, hex_value):
+    def set_hex_value(self, hex_value: str) -> None:
         self.__device.ctrl_transfer(
             self.bm_request_type,
             self.b_request,
@@ -55,10 +56,10 @@ class Device:
 
 
 class KeyboardControl:
-    def __init__(self, id_vendor, id_product):
+    def __init__(self, id_vendor: int, id_product: int):
         self.__keyboard = Device(id_vendor, id_product)
 
-    def set_rgb_highlight(self, rgb_profile):
+    def set_rgb_highlight(self, rgb_profile: RGBProfile) -> None:
         self.__keyboard.detach()
         for hex_value in rgb_profile.hex_values:
             try:

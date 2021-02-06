@@ -4,10 +4,10 @@ from typing import Dict, List
 
 import usb
 
-ID_VENDOR = 0x09DA
-ID_PRODUCT = 0xFA10
+ID_VENDOR: int = 0x09DA
+ID_PRODUCT: int = 0xFA10
 
-PATH_TO_DEFAULT_RGB_PROFILES = os.path.join(
+PATH_TO_DEFAULT_RGB_PROFILES: str = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "rgb_data/default_rgb_profiles.json"
 )
 

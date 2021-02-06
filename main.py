@@ -12,13 +12,43 @@ PATH_TO_DEFAULT_RGB_PROFILES = os.path.join(
 )
 
 
-class Device:
-    bm_request_type = 0x00000021
-    b_request = 0x09
-    w_value = 0x00000307
-    w_index = 2
+class RGBProfile:
+    hex_values: List[str]
 
-    def __init__(self, id_vendor, id_product):
+    def __init__(self, hex_values: List[str]):
+        self.hex_values = hex_values
+
+
+class RGBData:
+    path_to_data: str
+    rgb_data: Dict[str, List[str]]
+
+    def __init__(self, path_to_data: str):
+        self.path_to_data = path_to_data
+        self.rgb_data = {}
+        self.__read_data_from_disk()
+
+    def __read_data_from_disk(self) -> None:
+        with open(self.path_to_data, "r") as rgb_data:
+            self.rgb_data = json.loads(rgb_data.read())
+
+    def get_rgb_profile(self, key: str) -> RGBProfile:
+        rgb_data = self.rgb_data.get(key)
+        if rgb_data is not None:
+            return RGBProfile(rgb_data)
+        return RGBProfile([])
+
+
+class UsbDevice:
+    bm_request_type: int = 0x00000021
+    b_request: int = 0x09
+    w_value: int = 0x00000307
+    w_index: int = 2
+
+    id_vendor: int
+    id_product: int
+
+    def __init__(self, id_vendor: int, id_product: int):
         self.id_vendor = id_vendor
         self.id_product = id_product
         self.__device = None
@@ -55,40 +85,20 @@ class Device:
         )
 
 
-class KeyboardControl:
+class Keyboard:
     def __init__(self, id_vendor: int, id_product: int):
-        self.__keyboard = Device(id_vendor, id_product)
+        self.__keyboard_device = UsbDevice(id_vendor, id_product)
 
     def set_rgb_highlight(self, rgb_profile: RGBProfile) -> None:
-        self.__keyboard.detach()
+        self.__keyboard_device.detach()
         for hex_value in rgb_profile.hex_values:
             try:
-                self.__keyboard.set_hex_value(hex_value)
-            except usb.core.USBError:
-                self.__keyboard.release()
-        self.__keyboard.release()
-
-
-class RGBProfile:
-    def __init__(self, hex_values):
-        self.hex_values = hex_values
-
-
-class RGBData:
-    def __init__(self, path_to_data):
-        self.path_to_data = path_to_data
-        self.rgb_data = {}
-        self.__read_data_from_disk()
-
-    def __read_data_from_disk(self):
-        with open(self.path_to_data, "r") as rgb_data:
-            self.rgb_data = json.loads(rgb_data.read())
-
-    def get_rgb_profile(self, key):
-        rgb_data = self.rgb_data.get(key)
-        if rgb_data is not None:
-            return RGBProfile(rgb_data)
-        return None
+                self.__keyboard_device.set_hex_value(hex_value)
+            except usb.core.USBError as err:
+                self.__keyboard_device.release()
+                print(err)
+                raise
+        self.__keyboard_device.release()
 
 
 if __name__ == "__main__":

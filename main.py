@@ -1,7 +1,7 @@
 import json
 import os
 
-import usb.core
+import usb
 
 ID_VENDOR = 0x09DA
 ID_PRODUCT = 0xFA10

@@ -7,9 +7,10 @@ from rgb_utils import HexColor, RGBProfile
 ID_VENDOR: int = 0x09DA
 ID_PRODUCT: int = 0xFA10
 
-hex_int = functools.partial(int, base=0)
+all_int = functools.partial(int, base=0)
 
-if __name__ == "__main__":
+
+def init_argparser():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-c",
@@ -21,20 +22,28 @@ if __name__ == "__main__":
     parser.add_argument(
         "-id_v",
         "--id_vendor",
-        type=hex_int,
+        type=all_int,
         help="vendor id in hex format, default: 0x09DA".format(ID_VENDOR),
         default=ID_VENDOR,
     )
     parser.add_argument(
         "-id_p",
         "--id_product",
-        type=hex_int,
+        type=all_int,
         help="product id in hex format, default: 0xFA10".format(ID_PRODUCT),
         default=ID_PRODUCT,
     )
-    args = parser.parse_args()
+    return parser
 
-    rgb_keyboard = Keyboard(args.id_vendor, args.id_product)
-    color = HexColor(args.color)
-    rgb_profile = RGBProfile(color)
+
+def main(color, id_vendor, id_product):
+    rgb_keyboard = Keyboard(id_vendor, id_product)
+    rgb_color = HexColor(color)
+    rgb_profile = RGBProfile(rgb_color)
     rgb_keyboard.set_rgb_highlight(rgb_profile)
+
+
+if __name__ == "__main__":
+    parser = init_argparser()
+    args = parser.parse_args()
+    main(**vars(args))

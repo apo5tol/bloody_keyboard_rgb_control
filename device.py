@@ -2,6 +2,7 @@ import usb
 
 from rgb_utils import RGBProfile
 
+
 class UsbDevice:
     bm_request_type: int = 0x00000021
     b_request: int = 0x09
@@ -49,6 +50,7 @@ class UsbDevice:
             )
         except ValueError:
             self.release()
+            raise
 
 
 class Keyboard:
@@ -60,8 +62,7 @@ class Keyboard:
         for package_data in rgb_profile.packages_data:
             try:
                 self.__keyboard_device.set_value(package_data)
-            except usb.core.USBError as err:
+            except usb.core.USBError:
                 self.__keyboard_device.release()
-                print(err)
                 raise
         self.__keyboard_device.release()

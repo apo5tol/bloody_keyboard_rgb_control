@@ -1,5 +1,4 @@
 from typing import List, Dict
-from pprint import pprint
 
 PACKAGES_DATA: Dict[str, List[str]] = {
     "init": [

@@ -1,4 +1,4 @@
-# RGB Control for A4tech Bloody Keyboard for Linux
+# RGB control for A4Tech Bloody keyboard for Linux
 
 > This script allows you to set the RGB backlight color on A4Tech Bloody keyboards.
 

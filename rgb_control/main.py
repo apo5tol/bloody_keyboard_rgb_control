@@ -1,8 +1,8 @@
 import argparse
 import functools
 
-from device import Keyboard
-from rgb_utils import HexColor, RGBProfile
+from rgb_control.device import Keyboard
+from rgb_control.rgb_utils import HexColor, RGBProfile
 
 ID_VENDOR: int = 0x09DA
 ID_PRODUCT: int = 0xFA10
@@ -36,14 +36,18 @@ def init_argparser():
     return parser
 
 
-def main(color, id_vendor, id_product):
+def set_rgb_highlight(color, id_vendor, id_product):
     rgb_keyboard = Keyboard(id_vendor, id_product)
     rgb_color = HexColor(color)
     rgb_profile = RGBProfile(rgb_color)
     rgb_keyboard.set_rgb_highlight(rgb_profile)
 
 
-if __name__ == "__main__":
+def main():
     parser = init_argparser()
     args = parser.parse_args()
-    main(**vars(args))
+    set_rgb_highlight(**vars(args))
+
+
+if __name__ == "__main__":
+    main()

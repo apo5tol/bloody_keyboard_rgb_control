@@ -8,6 +8,11 @@
 - Make sure you are a sudo user.
 - Run the script.
 
+### Installing
+```console
+$ python -m pip install rgb-control
+```
+
 ### Optional arguments:
 ``` bash
 -c    - color in hex format. Example: 00ff00 #green

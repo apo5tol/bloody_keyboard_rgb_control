@@ -6,7 +6,10 @@
 
 - On the keyboard press `Fn` + `1`.
 - Make sure you are a sudo user.
-- Run the script.
+- Run the script:
+```console
+$ rgb-control -c ff0000
+```
 
 ### Installing
 ```console
@@ -14,7 +17,7 @@ $ python -m pip install rgb-control
 ```
 
 ### Optional arguments:
-``` bash
+``` console
 -c    - color in hex format. Example: 00ff00 #green
 -id_v - vendor id in hex format, default: 0x09DA  
 -id_p - product id in hex format, default: 0xFA10  

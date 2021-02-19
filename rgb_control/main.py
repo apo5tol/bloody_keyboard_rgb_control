@@ -1,8 +1,8 @@
 import argparse
 import functools
 
-from device import Keyboard
-from rgb_utils import HexColor, RGBProfile
+from rgb_control.device import Keyboard
+from rgb_control.rgb_utils import HexColor, RGBProfile
 
 ID_VENDOR: int = 0x09DA
 ID_PRODUCT: int = 0xFA10

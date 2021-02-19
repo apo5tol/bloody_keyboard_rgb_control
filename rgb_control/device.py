@@ -1,6 +1,6 @@
 import usb
 
-from rgb_utils import RGBProfile
+from rgb_control.rgb_utils import RGBProfile
 
 
 class UsbDevice:

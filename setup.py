@@ -2,7 +2,7 @@ import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
-А
+
 setuptools.setup(
     name="rgb-control",
     version="0.0.1",

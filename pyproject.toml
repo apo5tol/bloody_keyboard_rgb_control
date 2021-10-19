@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "rgb-control"
+version = "0.0.1"
+description = "The script allows you to set the RGB backlight color on A4Tech Bloody keyboards."
+readme = "README.md"
+authors = ["Alex Kuzhel <alexkuzhel.biz@gmail.com>"]
+license = "MIT"
+repository = "https://github.com/apo5tol/bloody_keyboard_rgb_control/"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+]
+
+[tool.poetry.scripts]
+rgb-control = "rgb_control.main:main"
+
+[tool.poetry.dependencies]
+python = "^3.6.2"
+pyusb = "1.1.0"
+
+[tool.poetry.dev-dependencies]
+black = "^21.9b0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

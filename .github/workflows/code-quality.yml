@@ -34,3 +34,6 @@ jobs:
       - name: Run Flake8
         shell: bash
         run: poetry run flake8 rgb_control/
+      - name: Run Isort
+        shell: bash
+        run: poetry run isort rgb_control/*.py -c -v

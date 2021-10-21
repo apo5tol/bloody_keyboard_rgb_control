@@ -16,15 +16,15 @@ class HexColor:
         self.hex_color = hex_color
 
     @property
-    def R(self) -> str:
+    def R(self) -> str:  # noqa: N802
         return self.hex_color[:2]
 
     @property
-    def G(self) -> str:
+    def G(self) -> str:  # noqa: N802
         return self.hex_color[2:4]
 
     @property
-    def B(self) -> str:
+    def B(self) -> str:  # noqa: N802
         return self.hex_color[4:6]
 
     def __getitem__(self, key: str) -> str:

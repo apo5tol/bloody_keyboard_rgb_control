@@ -15,11 +15,16 @@ classifiers = [
 rgb-control = "rgb_control.main:main"
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = "^3.7"
 pyusb = "1.1.0"
 
 [tool.poetry.dev-dependencies]
 black = "^21.9b0"
+flake8 = "^4.0.1"
+flake8-builtins = "^1.5.3"
+flake8-functions-names = "^0.0.6"
+pep8-naming = "^0.12.1"
+flake8-bugbear = "^21.9.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

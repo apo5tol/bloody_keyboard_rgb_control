@@ -84,7 +84,7 @@ class RGBProfile:
         self.packages_data = []
         self.__prepare_packages()
 
-    def __return_rgb_packages(self, key: str) -> List[str]:
+    def __create_rgb_packages(self, key: str) -> List[str]:
         rgb_packages = []
         for pattern in RGB_PACKAGES_PATTERNS[key]:
             rgb_packages.append(pattern.format(self.hex_color[key] * 58))
@@ -93,5 +93,5 @@ class RGBProfile:
     def __prepare_packages(self) -> None:
         self.packages_data = PACKAGES_DATA["init"]
         for rgb_key in self.order_rgb_keys:
-            self.packages_data += self.__return_rgb_packages(rgb_key)
+            self.packages_data += self.__create_rgb_packages(rgb_key)
         self.packages_data += PACKAGES_DATA["final"]

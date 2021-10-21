@@ -23,14 +23,14 @@ def init_argparser():
         "-id_v",
         "--id_vendor",
         type=all_int,
-        help="vendor id in hex format, default: 0x09DA".format(ID_VENDOR),
+        help="vendor id in hex format, default: {:#06x}".format(ID_VENDOR),
         default=ID_VENDOR,
     )
     parser.add_argument(
         "-id_p",
         "--id_product",
         type=all_int,
-        help="product id in hex format, default: 0xFA10".format(ID_PRODUCT),
+        help="product id in hex format, default: {:#06x}".format(ID_PRODUCT),
         default=ID_PRODUCT,
     )
     return parser

@@ -30,7 +30,7 @@ jobs:
         run: poetry install
       - name: Run Black
         shell: bash
-        run: poetry run black --check .
+        run: poetry run black --check rgb_control/
       - name: Run Flake8
         shell: bash
         run: poetry run flake8 rgb_control/

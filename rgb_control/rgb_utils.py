@@ -13,6 +13,8 @@ class HexColor:
     hex_color: str
 
     def __init__(self, hex_color: str = "000000"):
+        if len(hex_color) < 6:
+            raise ValueError("color must be in hex format")
         self.hex_color = hex_color
 
     @property
